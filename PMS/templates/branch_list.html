@@ -1,0 +1,68 @@
+{% extends 'branches.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="panel panel-default">
+
+<div class="panel-body" style="box-shadow: 0 0 3px 0 #888888; background-color: lightblue;">
+    CONTENT HERE: THE PMS MACHINE WORKS
+    <div class="row">
+
+        <div class="col-md-8">
+        
+            <hr>
+    
+            <div class="card card-body">
+                <a class="btn btn-primary btn-sm btn-block"> BRANCHES </a>
+                <table class="table table-bordered" style="border-color: black;">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for b in branches %}
+                      <tr>
+                        <td>
+                          <a href="#" data-toggle="collapse" data-target="#collapse-{{forloop.counter}}">{{b.name}}</a>
+                          <div id="collapse-{{forloop.counter}}" class="collapse">
+                            <strong>Directorates:</strong>
+                            <ul>
+                              {% for d in b.directorates.all %}
+                                  <li>{{d.name}}</li>
+                              {% empty %}
+                                <p>No directorates yet</p>
+                              {% endfor %}
+                            </ul>
+                          </div>
+                        </td>
+                        <td>{{b.join_date.date}}</td>
+                        <td><i onclick="window.location=`{% url 'update_branch' b.id %}`" style="color: black; cursor: pointer;" class="fa fa-edit"></i></td>
+                        <td><i onclick="window.location=`{% url 'delete_branch' b.id %}`" style="color: black; cursor: pointer;" class="fa fa-trash"></i></td>
+                      </tr>
+                      {% empty %}
+                      <p>No Branches yet!</p>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            
+            <hr>
+            <div class="card card-body">
+                <a class="btn btn-primary btn-sm btn-block" href="{% url 'create_branch' %}">CREATE BRANCHES</a>
+                <table class="table table-sm">
+                
+                </table>
+            </div>
+        </div>
+</div>
+{% endblock %} 

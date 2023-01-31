@@ -1,0 +1,21 @@
+{% extends 'branches.html' %}
+{% load static %}
+
+
+{% block content %}
+<h1 style="font-weight: bold;">UPDATE BRANCH</h1>
+<form method="POST" style="width: 50%; position: relative; bottom: -3em;">
+    {% csrf_token %}
+    <input value="{{branch.position}}" required class="form-control" style="margin-bottom: 10px;" type="number" name="position" placeholder="Position"/>
+    <input value="{{branch.name}}" required class="form-control" style="margin-bottom: 10px;" type="text" name="branch" placeholder="Branch name"/>
+    <input class="btn btn-primary" type="submit" name="Submit">
+</form>
+
+<h3 style="font-weight: bold; margin-top: 3em;">ADD DIRECTORATES</h1>
+<form method="POST" style="width: 50%;">
+    {% csrf_token %}
+    <input required class="form-control" style="margin-bottom: 10px;" type="text" name="directorate" placeholder="Directorate"/>
+    <input class="btn btn-primary" type="submit" name="Submit">
+</form>
+{% endblock %} 
+
